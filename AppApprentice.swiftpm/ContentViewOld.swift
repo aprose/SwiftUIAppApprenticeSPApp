@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct ContentViewOld: View {
     var body: some View {
         
         
@@ -9,8 +9,6 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
-                .padding()
-            TestingView()
                 .padding()
             
             

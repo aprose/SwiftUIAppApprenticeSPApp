@@ -3,24 +3,23 @@ import AVKit
 
 struct ExerciseView: View {
     
-    let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
-    let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
     let index: Int
-    
     let interval: TimeInterval = 30
+    
+    @Binding var selectedTab: Int
     
     var body: some View {
         
         GeometryReader { geometry in
             
             VStack {
-                HeaderView(titleText: exerciseNames[index])
+                HeaderView(titleText: Exercise.exercise[index].exerciseName)
                     .padding(.bottom)
                 Text("Video Player")
-                if let url = Bundle.main.url(forResource: videoNames[index], withExtension: "mp4") {
+                if let url = Bundle.main.url(forResource: Exercise.exercise[index].videoName, withExtension: "mp4") {
                     VideoPlayer(player: AVPlayer(url: url)).frame(height: geometry.size.height * 0.28)
                 } else {
-                    Text("Couldn't find \(videoNames[index]).mp4").foregroundColor(.blue)
+                    Text("Couldn't find \(Exercise.exercise[index].videoName).mp4").foregroundColor(.blue)
                 }
                 Text(Date().addingTimeInterval(interval), style: .timer).font(.system(size: 30))
                 Button("Start/Done") {
@@ -47,7 +46,7 @@ struct ExerciseView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ExerciseView(index: 0)
+        ExerciseView(index: 0, selectedTab: .constant(1))
     }
     
 }
